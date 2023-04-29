@@ -30,139 +30,102 @@ var greeting = "Hello, playground"
 
  */
 
+//func commonChild(s1: String, s2: String) -> Int {
+//    let s1Array = Array(s1)
+//    let s2Array = Array(s2)
+//
+//    let commonChars = s1Array.filter { s2Array.contains($0) }
+//
+//    var maxLength = 0
+//
+//    for i in 0..<commonChars.count {
+//        var length = 1
+//        for j in i+1..<commonChars.count {
+//            if s1Array.firstIndex(of: commonChars[j-1])! < s1Array.firstIndex(of: commonChars[j])! &&
+//                s2Array.firstIndex(of: commonChars[j-1])! < s2Array.firstIndex(of: commonChars[j])! {
+//                length += 1
+//            }
+//        }
+//        if length > maxLength {
+//            maxLength = length
+//        }
+//    }
+//
+//    return maxLength
+//}
+//
+//var result = commonChild(s1: "ABCD", s2: "ABDC")
+//print("result:\(result)")
+
 func commonChild(s1: String, s2: String) -> Int {
-    let s1Array = Array(s1)
-    let s2Array = Array(s2)
+    let l1 = s1.count
+    let l2 = s2.count
     
-    let commonChars = s1Array.filter { s2Array.contains($0) }
+    var arr = Array(repeating: Array(repeating: 0, count: l2 + 1), count: l1 + 1)
     
-    var maxLength = 0
-    
-    for i in 0..<commonChars.count {
-        var length = 1
-        for j in i+1..<commonChars.count {
-            if s1Array.firstIndex(of: commonChars[j-1])! < s1Array.firstIndex(of: commonChars[j])! &&
-                s2Array.firstIndex(of: commonChars[j-1])! < s2Array.firstIndex(of: commonChars[j])! {
-                length += 1
+    for i in (0..<l1).reversed() {
+        for j in (0..<l2).reversed() {
+            if s1[s1.index(s1.startIndex, offsetBy: i)] == s2[s2.index(s2.startIndex, offsetBy: j)] {
+                arr[i][j] = arr[i + 1][j + 1] + 1
+            } else {
+                arr[i][j] = max(arr[i + 1][j], arr[i][j + 1])
             }
-        }
-        if length > maxLength {
-            maxLength = length
         }
     }
     
-    return maxLength
+    var i = 0
+    var j = 0
+    var result = ""
+    
+    while i < l1 && j < l2 {
+        if s1[s1.index(s1.startIndex, offsetBy: i)] == s2[s2.index(s2.startIndex, offsetBy: j)] {
+            result.append(s1[s1.index(s1.startIndex, offsetBy: i)])
+            i += 1
+            j += 1
+        } else if arr[i + 1][j] >= arr[i][j + 1] {
+            i += 1
+        } else {
+            j += 1
+        }
+    }
+    
+    return result.count
 }
 
 var result = commonChild(s1: "ABCD", s2: "ABDC")
 print("result:\(result)")
 
-func commonChild1(s1: String, s2: String) -> Int {
-    let s1Array = Array(s1)
-    let s2Array = Array(s2)
+func lcs(_ str1: String, _ str2: String) -> String {
+    let l1 = str1.count
+    let l2 = str2.count
     
-    let commonChars = s1Array.filter { s2Array.contains($0) }
+    var arr = [[Int]](repeating: [Int](repeating: 0, count: l2 + 1), count: l1 + 1)
     
-    var maxLength = 0
+    let str1Array = Array(str1)
+    let str2Array = Array(str2)
     
-    for i in 0..<commonChars.count {
-        var length = 1
-        let commonChar = commonChars[i]
-        let s1Indices = s1Array.indices.filter { s1Array[$0] == commonChar }
-        let s2Indices = s2Array.indices.filter { s2Array[$0] == commonChar }
-        var j = 0
-        var k = 0
-        while j < s1Indices.count && k < s2Indices.count {
-            if s1Indices[j] < s1Indices.first! || s2Indices[k] < s2Indices.first! {
-                if s1Indices[j] < s1Indices.first! {
-                    j += 1
-                }
-                if s2Indices[k] < s2Indices.first! {
-                    k += 1
-                }
-            } else if s1Indices[j] < s1Indices.last! && s2Indices[k] < s2Indices.last! && s1Indices[j+1] < s2Indices[k+1] {
-                j += 1
+    for i in (0..<l1).reversed() {
+        for j in (0..<l2).reversed() {
+            if str1Array[i] == str2Array[j] {
+                arr[i][j] = arr[i+1][j+1] + 1
             } else {
-                k += 1
-            }
-            length += 1
-        }
-        if length > maxLength {
-            maxLength = length
-        }
-    }
-    
-    return maxLength - 1
-}
-
-
-result = commonChild(s1: "ABCD", s2: "ABDC")
-print("result:\(result)")
-
-
-func commonChild2(s1: String, s2: String) -> Int {
-    let s1Array = Array(s1)
-    let s2Array = Array(s2)
-    
-    var memo = Array(repeating: Array(repeating: 0, count: s2.count + 1), count: s1.count + 1)
-    
-    for i in 1...s1.count {
-        for j in 1...s2.count {
-            if s1Array[i-1] == s2Array[j-1] {
-                memo[i][j] = memo[i-1][j-1] + 1
-            } else {
-                memo[i][j] = max(memo[i-1][j], memo[i][j-1])
+                arr[i][j] = max(arr[i+1][j], arr[i][j+1])
             }
         }
     }
     
-    return memo[s1.count][s2.count]
-}
-
-result = commonChild2(s1: "ABCD", s2: "ABDC")
-print("result:\(result)")
-
-func commonChild3(s1: String, s2: String) -> Int {
-    var suffixes = Array(repeating: Array(repeating: 0, count: s2.count + 1), count: 2)
-    var activeRow = 0
-    
-    for i in s1.indices {
-        let prevRow = activeRow
-        activeRow = 1 - activeRow
-        
-        for j in s2.indices {
-            if s1[i] == s2[j] {
-                suffixes[activeRow][j+1] = suffixes[prevRow][j] + 1
-            } else {
-                suffixes[activeRow][j+1] = max(suffixes[activeRow][j], suffixes[prevRow][j+1])
-            }
+    var i = 0, j = 0
+    var sb = ""
+    while i < l1 && j < l2 {
+        if str1Array[i] == str2Array[j] {
+            sb.append(str1Array[i])
+            i += 1
+            j += 1
+        } else if arr[i+1][j] >= arr[i][j+1] {
+            i += 1
+        } else {
+            j += 1
         }
     }
-    
-    return suffixes[activeRow][s2.count]
+    return sb
 }
-
-result = commonChild3(s1: "ABCD", s2: "ABDC")
-print("result:\(result)")
-
-func commonChild4(s1: String, s2: String) -> Int {
-    let s1Array = Array(s1)
-    let s2Array = Array(s2)
-    
-    var memo = Array(repeating: Array(repeating: 0, count: s2.count + 1), count: s1.count + 1)
-    
-    for i in 1...s1.count {
-        memo[i] = (1...s2.count).reduce([0]) { (prev, j) in
-            if s1Array[i-1] == s2Array[j-1] {
-                return prev + [memo[i-1][j-1] + 1]
-            } else {
-                return prev + [max(memo[i-1][j], memo[i][j-1])]
-            }
-        }
-    }
-    
-    return memo[s1.count][s2.count]
-}
-
-result = commonChild4(s1: "ABCD", s2: "ABDC")
-print("result:\(result)")

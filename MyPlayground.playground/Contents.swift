@@ -30,3 +30,30 @@ var greeting = "Hello, playground"
 
  */
 
+func commonChild(s1: String, s2: String) -> Int {
+    let s1Array = Array(s1)
+    let s2Array = Array(s2)
+    
+    let commonChars = s1Array.filter { s2Array.contains($0) }
+    
+    var maxLength = 0
+    
+    for i in 0..<commonChars.count {
+        var length = 1
+        for j in i+1..<commonChars.count {
+            if s1Array.firstIndex(of: commonChars[i])! < s1Array.firstIndex(of: commonChars[j])! &&
+                s2Array.firstIndex(of: commonChars[i])! < s2Array.firstIndex(of: commonChars[j])! {
+                length += 1
+            }
+        }
+        if length > maxLength {
+            maxLength = length
+        }
+    }
+    
+    return maxLength
+}
+
+let result = commonChild(s1: "ABCD", s2: "ABDC")
+print("result:\(result)")
+

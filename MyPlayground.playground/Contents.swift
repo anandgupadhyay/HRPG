@@ -41,8 +41,8 @@ func commonChild(s1: String, s2: String) -> Int {
     for i in 0..<commonChars.count {
         var length = 1
         for j in i+1..<commonChars.count {
-            if s1Array.firstIndex(of: commonChars[i])! < s1Array.firstIndex(of: commonChars[j])! &&
-                s2Array.firstIndex(of: commonChars[i])! < s2Array.firstIndex(of: commonChars[j])! {
+            if s1Array.firstIndex(of: commonChars[j-1])! < s1Array.firstIndex(of: commonChars[j])! &&
+                s2Array.firstIndex(of: commonChars[j-1])! < s2Array.firstIndex(of: commonChars[j])! {
                 length += 1
             }
         }
@@ -57,3 +57,44 @@ func commonChild(s1: String, s2: String) -> Int {
 let result = commonChild(s1: "ABCD", s2: "ABDC")
 print("result:\(result)")
 
+func commonChild1(s1: String, s2: String) -> Int {
+    let s1Array = Array(s1)
+    let s2Array = Array(s2)
+    
+    let commonChars = s1Array.filter { s2Array.contains($0) }
+    
+    var maxLength = 0
+    
+    for i in 0..<commonChars.count {
+        var length = 1
+        let commonChar = commonChars[i]
+        let s1Indices = s1Array.indices.filter { s1Array[$0] == commonChar }
+        let s2Indices = s2Array.indices.filter { s2Array[$0] == commonChar }
+        var j = 0
+        var k = 0
+        while j < s1Indices.count && k < s2Indices.count {
+            if s1Indices[j] < s1Indices.first! || s2Indices[k] < s2Indices.first! {
+                if s1Indices[j] < s1Indices.first! {
+                    j += 1
+                }
+                if s2Indices[k] < s2Indices.first! {
+                    k += 1
+                }
+            } else if s1Indices[j] < s1Indices.last! && s2Indices[k] < s2Indices.last! && s1Indices[j+1] < s2Indices[k+1] {
+                j += 1
+            } else {
+                k += 1
+            }
+            length += 1
+        }
+        if length > maxLength {
+            maxLength = length
+        }
+    }
+    
+    return maxLength - 1
+}
+
+
+result = commonChild(s1: "ABCD", s2: "ABDC")
+print("result:\(result)")

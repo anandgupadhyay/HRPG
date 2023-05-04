@@ -1,6 +1,6 @@
 import UIKit
 
-var greeting = "Hello, playground"
+//var greeting = "Hello, playground"
 
 /*
  Write function in swift
@@ -95,41 +95,41 @@ var greeting = "Hello, playground"
 //var result = commonChild(s1: "ABCD", s2: "ABDC")
 //print("result:\(result)")
 
-func commonChild(s1: String, s2: String) -> Int {
-    let l1 = s1.count
-    let l2 = s2.count
-    
-    var arr = [[Int]](repeating: [Int](repeating: 0, count: l2 + 1), count: l1 + 1)
-    
-    let str1Array = Array(s1)
-    let str2Array = Array(s2)
-    
-    for i in (0..<l1).reversed() {
-        for j in (0..<l2).reversed() {
-            if str1Array[i] == str2Array[j] {
-                arr[i][j] = arr[i+1][j+1] + 1
-            } else {
-                arr[i][j] = max(arr[i+1][j], arr[i][j+1])
-            }
-        }
-    }
-    
-    var i = 0, j = 0
-    var sb = ""
-    while i < l1 && j < l2 {
-        if str1Array[i] == str2Array[j] {
-            sb.append(str1Array[i])
-            i += 1
-            j += 1
-        } else if arr[i+1][j] >= arr[i][j+1] {
-            i += 1
-        } else {
-            j += 1
-        }
-    }
-    return sb.count
-}
-
-var result = commonChild(s1: "ABCD", s2: "ABDC")
-print("result:\(result)")
+//func commonChild(s1: String, s2: String) -> Int {
+//    let l1 = s1.count
+//    let l2 = s2.count
+//
+//    var arr = [[Int]](repeating: [Int](repeating: 0, count: l2 + 1), count: l1 + 1)
+//
+//    let str1Array = Array(s1)
+//    let str2Array = Array(s2)
+//
+//    for i in (0..<l1).reversed() {
+//        for j in (0..<l2).reversed() {
+//            if str1Array[i] == str2Array[j] {
+//                arr[i][j] = arr[i+1][j+1] + 1
+//            } else {
+//                arr[i][j] = max(arr[i+1][j], arr[i][j+1])
+//            }
+//        }
+//    }
+//
+//    var i = 0, j = 0
+//    var sb = ""
+//    while i < l1 && j < l2 {
+//        if str1Array[i] == str2Array[j] {
+//            sb.append(str1Array[i])
+//            i += 1
+//            j += 1
+//        } else if arr[i+1][j] >= arr[i][j+1] {
+//            i += 1
+//        } else {
+//            j += 1
+//        }
+//    }
+//    return sb.count
+//}
+//
+//var result = commonChild(s1: "ABCD", s2: "ABDC")
+//print("result:\(result)")
 

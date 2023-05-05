@@ -133,38 +133,71 @@ import UIKit
 //var result = commonChild(s1: "ABCD", s2: "ABDC")
 //print("result:\(result)")
 
-class Person{
-    var name: String
-    
-    init(name:String) {
-        self.name = name
+//class Person{
+//    var name: String
+//    
+//    init(name:String) {
+//        self.name = name
+//    }
+//}
+//
+//struct Company{
+//    
+//    var size: Int
+//    var manager: Person
+//    
+//    init(size: Int, manager: Person){
+//        self.size = size
+//        self.manager = manager
+//    }
+//    mutating func increaseSize1(){
+//        self = Company(size: size+1, manager: manager)
+//    }
+//    
+//    mutating func increaseSize2(){
+//        size += 1
+//    }
+//}
+//
+//
+//var companyA = Company(size: 100, manager: Person(name: "Peter"))
+//print(companyA.size)
+//var companyB = companyA
+//
+//companyA.size = 150
+//print(companyA.size)
+
+
+// Function definition
+func stringSimilarity(s: String) -> Int {
+    let n = s.count
+    var lcp = Array(repeating: 0, count: n)
+    var j = 0
+    for (i, char) in s.enumerated() {
+        if i == 0 {
+            continue
+        }
+        while j > 0 && s[s.index(s.startIndex, offsetBy: j)] != char {
+            j = lcp[j - 1]
+        }
+        if s[s.index(s.startIndex, offsetBy: j)] == char {
+            j += 1
+        }
+        lcp[i] = j
     }
+    var result = n
+    for i in 1..<n {
+        result += lcp[i]
+    }
+    return result
 }
 
-struct Company{
-    
-    var size: Int
-    var manager: Person
-    
-    init(size: Int, manager: Person){
-        self.size = size
-        self.manager = manager
-    }
-    mutating func increaseSize1(){
-        self = Company(size: size+1, manager: manager)
-    }
-    
-    mutating func increaseSize2(){
-        size += 1
-    }
-}
+// Test case 1
+let s1 = "ababaa"
+let output1 = stringSimilarity(s: s1)
+print(output1) // Output: 11
 
-
-var companyA = Company(size: 100, manager: Person(name: "Peter"))
-print(companyA.size)
-var companyB = companyA
-
-companyA.size = 150
-print(companyA.size)
-
-
+// Test case 2
+let s2 = "aa"
+let output2 = stringSimilarity(s: s2)
+print(output2) // Output: 3

@@ -133,3 +133,38 @@ import UIKit
 //var result = commonChild(s1: "ABCD", s2: "ABDC")
 //print("result:\(result)")
 
+class Person{
+    var name: String
+    
+    init(name:String) {
+        self.name = name
+    }
+}
+
+struct Company{
+    
+    var size: Int
+    var manager: Person
+    
+    init(size: Int, manager: Person){
+        self.size = size
+        self.manager = manager
+    }
+    mutating func increaseSize1(){
+        self = Company(size: size+1, manager: manager)
+    }
+    
+    mutating func increaseSize2(){
+        size += 1
+    }
+}
+
+
+var companyA = Company(size: 100, manager: Person(name: "Peter"))
+print(companyA.size)
+var companyB = companyA
+
+companyA.size = 150
+print(companyA.size)
+
+

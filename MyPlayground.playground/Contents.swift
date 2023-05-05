@@ -202,25 +202,25 @@ import UIKit
 //let output2 = stringSimilarity(s: s2)
 //print(output2) // Output: 3
 
-func stringSimilarity1(s: String) -> Int {
-    let n = s.count
-    var lcp = Array(repeating: 0, count: n)
-    var j = 0
-    for (i, char) in s.enumerated() {
-        if i == 0 {
-            continue
-        }
-        while j > 0 && s[s.index(s.startIndex, offsetBy: j)] != char {
-            j = lcp[j - 1]
-        }
-        if s[s.index(s.startIndex, offsetBy: j)] == char {
-            j += 1
-        }
-        lcp[i] = j
-    }
-    var result = n
-    for i in 1..<n {
-        result += lcp[i]
-    }
-    return result
-}
+//func stringSimilarity1(s: String) -> Int {
+//    let n = s.count
+//    var lcp = Array(repeating: 0, count: n)
+//    var j = 0
+//    for (i, char) in s.enumerated() {
+//        if i == 0 {
+//            continue
+//        }
+//        while j > 0 && s[s.index(s.startIndex, offsetBy: j)] != char {
+//            j = lcp[j - 1]
+//        }
+//        if s[s.index(s.startIndex, offsetBy: j)] == char {
+//            j += 1
+//        }
+//        lcp[i] = j
+//    }
+//    var result = n
+//    for i in 1..<n {
+//        result += lcp[i]
+//    }
+//    return result
+//}

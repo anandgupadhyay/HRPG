@@ -267,3 +267,26 @@ func maxSubarray1(arr: [Int]) -> [Int] {
     
     return [maxSubarraySum, maxSubsequenceSum]
 }
+
+func maxSubarray3(_ A: [Int]) -> [Int] {
+    var positiveSum = 0
+    var largestNum = A[0]
+    var maxEndingHere = A[0]
+    var maxSoFar = A[0]
+    
+    for i in 1..<A.count {
+        let x = A[i]
+        maxEndingHere = max(x, maxEndingHere + x)
+        maxSoFar = max(maxSoFar, maxEndingHere)
+
+        if x > largestNum {
+            largestNum = x
+        }
+        if x > 0 {
+            positiveSum += x
+        }
+    }
+    
+    let nonContingentSum = largestNum < 0 ? largestNum : positiveSum
+    return [maxSoFar, nonContingentSum]
+}

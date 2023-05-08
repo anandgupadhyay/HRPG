@@ -224,3 +224,17 @@ import UIKit
 //    }
 //    return result
 //}
+func maxSubarray(arr: [Int]) -> [Int] {
+    var maxSubarraySum = Int.min
+    var maxSubsequenceSum = 0
+    
+    for num in arr {
+        // Update maxSubsequenceSum
+        maxSubsequenceSum = max(maxSubsequenceSum + num, maxSubsequenceSum, num)
+        
+        // Update maxSubarraySum
+        maxSubarraySum = max(maxSubarraySum, maxSubsequenceSum)
+    }
+    
+    return [maxSubarraySum, maxSubsequenceSum]
+}

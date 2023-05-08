@@ -253,3 +253,17 @@ func maxSubarray(arr: [Int]) -> [Int] {
     
     return [maxSubarraySum, maxSubsequenceSum]
 }
+
+func maxSubarray1(arr: [Int]) -> [Int] {
+    var maxSubarraySum = arr[0]
+    var maxSubsequenceSum = arr[0]
+    var currMax = arr[0]
+    
+    for i in 1..<arr.count {
+        currMax = max(currMax + arr[i], arr[i])
+        maxSubarraySum = max(maxSubarraySum, currMax)
+        maxSubsequenceSum += max(arr[i], 0)
+    }
+    
+    return [maxSubarraySum, maxSubsequenceSum]
+}

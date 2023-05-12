@@ -30,214 +30,214 @@ import UIKit
 
  */
 
-//func commonChild(s1: String, s2: String) -> Int {
-//    let s1Array = Array(s1)
-//    let s2Array = Array(s2)
-//
-//    let commonChars = s1Array.filter { s2Array.contains($0) }
-//
-//    var maxLength = 0
-//
-//    for i in 0..<commonChars.count {
-//        var length = 1
-//        for j in i+1..<commonChars.count {
-//            if s1Array.firstIndex(of: commonChars[j-1])! < s1Array.firstIndex(of: commonChars[j])! &&
-//                s2Array.firstIndex(of: commonChars[j-1])! < s2Array.firstIndex(of: commonChars[j])! {
-//                length += 1
-//            }
-//        }
-//        if length > maxLength {
-//            maxLength = length
-//        }
-//    }
-//
-//    return maxLength
-//}
-//
-//var result = commonChild(s1: "ABCD", s2: "ABDC")
-//print("result:\(result)")
+func commonChild(s1: String, s2: String) -> Int {
+    let s1Array = Array(s1)
+    let s2Array = Array(s2)
 
-//func commonChild(s1: String, s2: String) -> Int {
-//    let l1 = s1.count
-//    let l2 = s2.count
-//
-//    var arr = Array(repeating: Array(repeating: 0, count: l2 + 1), count: l1 + 1)
-//
-//    for i in (0..<l1).reversed() {
-//        for j in (0..<l2).reversed() {
-//            if s1[s1.index(s1.startIndex, offsetBy: i)] == s2[s2.index(s2.startIndex, offsetBy: j)] {
-//                arr[i][j] = arr[i + 1][j + 1] + 1
-//            } else {
-//                arr[i][j] = max(arr[i + 1][j], arr[i][j + 1])
-//            }
-//        }
-//    }
-//
-//    var i = 0
-//    var j = 0
-//    var result = ""
-//
-//    while i < l1 && j < l2 {
-//        if s1[s1.index(s1.startIndex, offsetBy: i)] == s2[s2.index(s2.startIndex, offsetBy: j)] {
-//            result.append(s1[s1.index(s1.startIndex, offsetBy: i)])
-//            i += 1
-//            j += 1
-//        } else if arr[i + 1][j] >= arr[i][j + 1] {
-//            i += 1
-//        } else {
-//            j += 1
-//        }
-//    }
-//
-//    return result.count
-//}
-//
-//var result = commonChild(s1: "ABCD", s2: "ABDC")
-//print("result:\(result)")
+    let commonChars = s1Array.filter { s2Array.contains($0) }
 
-//func commonChild(s1: String, s2: String) -> Int {
-//    let l1 = s1.count
-//    let l2 = s2.count
-//
-//    var arr = [[Int]](repeating: [Int](repeating: 0, count: l2 + 1), count: l1 + 1)
-//
-//    let str1Array = Array(s1)
-//    let str2Array = Array(s2)
-//
-//    for i in (0..<l1).reversed() {
-//        for j in (0..<l2).reversed() {
-//            if str1Array[i] == str2Array[j] {
-//                arr[i][j] = arr[i+1][j+1] + 1
-//            } else {
-//                arr[i][j] = max(arr[i+1][j], arr[i][j+1])
-//            }
-//        }
-//    }
-//
-//    var i = 0, j = 0
-//    var sb = ""
-//    while i < l1 && j < l2 {
-//        if str1Array[i] == str2Array[j] {
-//            sb.append(str1Array[i])
-//            i += 1
-//            j += 1
-//        } else if arr[i+1][j] >= arr[i][j+1] {
-//            i += 1
-//        } else {
-//            j += 1
-//        }
-//    }
-//    return sb.count
-//}
-//
-//var result = commonChild(s1: "ABCD", s2: "ABDC")
-//print("result:\(result)")
+    var maxLength = 0
 
-//class Person{
-//    var name: String
-//
-//    init(name:String) {
-//        self.name = name
-//    }
-//}
-//
-//struct Company{
-//
-//    var size: Int
-//    var manager: Person
-//
-//    init(size: Int, manager: Person){
-//        self.size = size
-//        self.manager = manager
-//    }
-//    mutating func increaseSize1(){
-//        self = Company(size: size+1, manager: manager)
-//    }
-//
-//    mutating func increaseSize2(){
-//        size += 1
-//    }
-//}
-//
-//
-//var companyA = Company(size: 100, manager: Person(name: "Peter"))
-//print(companyA.size)
-//var companyB = companyA
-//
-//companyA.size = 150
-//print(companyA.size)
+    for i in 0..<commonChars.count {
+        var length = 1
+        for j in i+1..<commonChars.count {
+            if s1Array.firstIndex(of: commonChars[j-1])! < s1Array.firstIndex(of: commonChars[j])! &&
+                s2Array.firstIndex(of: commonChars[j-1])! < s2Array.firstIndex(of: commonChars[j])! {
+                length += 1
+            }
+        }
+        if length > maxLength {
+            maxLength = length
+        }
+    }
+
+    return maxLength
+}
+
+var result = commonChild(s1: "ABCD", s2: "ABDC")
+print("result:\(result)")
+
+func commonChild(s1: String, s2: String) -> Int {
+    let l1 = s1.count
+    let l2 = s2.count
+
+    var arr = Array(repeating: Array(repeating: 0, count: l2 + 1), count: l1 + 1)
+
+    for i in (0..<l1).reversed() {
+        for j in (0..<l2).reversed() {
+            if s1[s1.index(s1.startIndex, offsetBy: i)] == s2[s2.index(s2.startIndex, offsetBy: j)] {
+                arr[i][j] = arr[i + 1][j + 1] + 1
+            } else {
+                arr[i][j] = max(arr[i + 1][j], arr[i][j + 1])
+            }
+        }
+    }
+
+    var i = 0
+    var j = 0
+    var result = ""
+
+    while i < l1 && j < l2 {
+        if s1[s1.index(s1.startIndex, offsetBy: i)] == s2[s2.index(s2.startIndex, offsetBy: j)] {
+            result.append(s1[s1.index(s1.startIndex, offsetBy: i)])
+            i += 1
+            j += 1
+        } else if arr[i + 1][j] >= arr[i][j + 1] {
+            i += 1
+        } else {
+            j += 1
+        }
+    }
+
+    return result.count
+}
+
+var result = commonChild(s1: "ABCD", s2: "ABDC")
+print("result:\(result)")
+
+func commonChild(s1: String, s2: String) -> Int {
+    let l1 = s1.count
+    let l2 = s2.count
+
+    var arr = [[Int]](repeating: [Int](repeating: 0, count: l2 + 1), count: l1 + 1)
+
+    let str1Array = Array(s1)
+    let str2Array = Array(s2)
+
+    for i in (0..<l1).reversed() {
+        for j in (0..<l2).reversed() {
+            if str1Array[i] == str2Array[j] {
+                arr[i][j] = arr[i+1][j+1] + 1
+            } else {
+                arr[i][j] = max(arr[i+1][j], arr[i][j+1])
+            }
+        }
+    }
+
+    var i = 0, j = 0
+    var sb = ""
+    while i < l1 && j < l2 {
+        if str1Array[i] == str2Array[j] {
+            sb.append(str1Array[i])
+            i += 1
+            j += 1
+        } else if arr[i+1][j] >= arr[i][j+1] {
+            i += 1
+        } else {
+            j += 1
+        }
+    }
+    return sb.count
+}
+
+var result = commonChild(s1: "ABCD", s2: "ABDC")
+print("result:\(result)")
+
+class Person{
+    var name: String
+
+    init(name:String) {
+        self.name = name
+    }
+}
+
+struct Company{
+
+    var size: Int
+    var manager: Person
+
+    init(size: Int, manager: Person){
+        self.size = size
+        self.manager = manager
+    }
+    mutating func increaseSize1(){
+        self = Company(size: size+1, manager: manager)
+    }
+
+    mutating func increaseSize2(){
+        size += 1
+    }
+}
 
 
-// Function definition
-//func stringSimilarity(s: String) -> Int {
-//    let n = s.count
-//    var lcp = Array(repeating: 0, count: n)
-//    var j = 0
-//    for (i, char) in s.enumerated() {
-//        if i == 0 {
-//            continue
-//        }
-//        while j > 0 && s[s.index(s.startIndex, offsetBy: j)] != char {
-//            j = lcp[j - 1]
-//        }
-//        if s[s.index(s.startIndex, offsetBy: j)] == char {
-//            j += 1
-//        }
-//        lcp[i] = j
-//    }
-//    var result = n
-//    for i in 1..<n {
-//        result += lcp[i]
-//    }
-//    return result
-//}
-//
-//// Test case 1
-//let s1 = "ababaa"
-//let output1 = stringSimilarity(s: s1)
-//print(output1) // Output: 11
-//
-//// Test case 2
-//let s2 = "aa"
-//let output2 = stringSimilarity(s: s2)
-//print(output2) // Output: 3
+var companyA = Company(size: 100, manager: Person(name: "Peter"))
+print(companyA.size)
+var companyB = companyA
 
-//func stringSimilarity1(s: String) -> Int {
-//    let n = s.count
-//    var lcp = Array(repeating: 0, count: n)
-//    var j = 0
-//    for (i, char) in s.enumerated() {
-//        if i == 0 {
-//            continue
-//        }
-//        while j > 0 && s[s.index(s.startIndex, offsetBy: j)] != char {
-//            j = lcp[j - 1]
-//        }
-//        if s[s.index(s.startIndex, offsetBy: j)] == char {
-//            j += 1
-//        }
-//        lcp[i] = j
-//    }
-//    var result = n
-//    for i in 1..<n {
-//        result += lcp[i]
-//    }
-//    return result
-//}
-//func maxSubarray(arr: [Int]) -> [Int] {
-//    var maxSubarraySum = Int.min
-//    var maxSubsequenceSum = 0
-//
-//    for num in arr {
-//        // Update maxSubsequenceSum
-//        maxSubsequenceSum = max(maxSubsequenceSum + num, maxSubsequenceSum, num)
-//
-//        // Update maxSubarraySum
-//        maxSubarraySum = max(maxSubarraySum, maxSubsequenceSum)
-//    }
-//
-//    return [maxSubarraySum, maxSubsequenceSum]
-//}
+companyA.size = 150
+print(companyA.size)
+
+
+ Function definition
+func stringSimilarity(s: String) -> Int {
+    let n = s.count
+    var lcp = Array(repeating: 0, count: n)
+    var j = 0
+    for (i, char) in s.enumerated() {
+        if i == 0 {
+            continue
+        }
+        while j > 0 && s[s.index(s.startIndex, offsetBy: j)] != char {
+            j = lcp[j - 1]
+        }
+        if s[s.index(s.startIndex, offsetBy: j)] == char {
+            j += 1
+        }
+        lcp[i] = j
+    }
+    var result = n
+    for i in 1..<n {
+        result += lcp[i]
+    }
+    return result
+}
+
+// Test case 1
+let s1 = "ababaa"
+let output1 = stringSimilarity(s: s1)
+print(output1) // Output: 11
+
+// Test case 2
+let s2 = "aa"
+let output2 = stringSimilarity(s: s2)
+print(output2) // Output: 3
+
+func stringSimilarity1(s: String) -> Int {
+    let n = s.count
+    var lcp = Array(repeating: 0, count: n)
+    var j = 0
+    for (i, char) in s.enumerated() {
+        if i == 0 {
+            continue
+        }
+        while j > 0 && s[s.index(s.startIndex, offsetBy: j)] != char {
+            j = lcp[j - 1]
+        }
+        if s[s.index(s.startIndex, offsetBy: j)] == char {
+            j += 1
+        }
+        lcp[i] = j
+    }
+    var result = n
+    for i in 1..<n {
+        result += lcp[i]
+    }
+    return result
+}
+func maxSubarray(arr: [Int]) -> [Int] {
+    var maxSubarraySum = Int.min
+    var maxSubsequenceSum = 0
+
+    for num in arr {
+        // Update maxSubsequenceSum
+        maxSubsequenceSum = max(maxSubsequenceSum + num, maxSubsequenceSum, num)
+
+        // Update maxSubarraySum
+        maxSubarraySum = max(maxSubarraySum, maxSubsequenceSum)
+    }
+
+    return [maxSubarraySum, maxSubsequenceSum]
+}
 
 func maxSubarray(arr: [Int]) -> [Int] {
     var maxSubarraySum = arr[0]
@@ -298,63 +298,63 @@ func maxSubarray3(_ A: [Int]) -> [Int] {
 
  }
  */
-func bfs(n: Int, m: Int, edges: [[Int]], s: Int) -> [Int] {
-    var graph = [Int: [Int]]() // adjacency list representation of the graph
-    
-    // populate the graph
-    for edge in edges {
-        let u = edge[0], v = edge[1]
-        graph[u, default: []].append(v)
-        graph[v, default: []].append(u)
-    }
-    
-    var distances = Array(repeating: -1, count: n) // array to store the distances from the starting node
-    var queue = [s] // initialize the queue with the starting node
-    distances[s-1] = 0 // distance to starting node is 0
-    
-    // perform breadth-first search
-    while !queue.isEmpty {
-        let u = queue.removeFirst()
-        for v in graph[u, default: []] {
-            if distances[v-1] == -1 { // v has not been visited yet
-                distances[v-1] = distances[u-1] + 6
-                queue.append(v)
-            }
-        }
-    }
-    
-    distances.remove(at: s-1) // remove the distance to the starting node
-    return distances
-}
-
-func bfs1(n: Int, m: Int, edges: [[Int]], s: Int) -> [Int] {
-    var graph = [[Int]](repeating: [], count: n) // adjacency list representation of the graph
-    
-    // populate the graph
-    for edge in edges {
-        let u = edge[0]-1, v = edge[1]-1
-        graph[u].append(v)
-        graph[v].append(u)
-    }
-    
-    var distances = Array(repeating: -1, count: n) // array to store the distances from the starting node
-    var visited = Set<Int>() // set to keep track of visited nodes
-    var queue = Set<Int>([s-1]) // initialize the queue with the starting node
-    
-    distances[s-1] = 0 // distance to starting node is 0
-    
-    // perform breadth-first search
-    while !queue.isEmpty {
-        let u = queue.removeFirst()
-        visited.insert(u)
-        for v in graph[u] {
-            if !visited.contains(v) { // v has not been visited yet
-                distances[v] = distances[u] + 6
-                queue.insert(v)
-            }
-        }
-    }
-    
-    distances.remove(at: s-1) // remove the distance to the starting node
-    return distances
-}
+//func bfs(n: Int, m: Int, edges: [[Int]], s: Int) -> [Int] {
+//    var graph = [Int: [Int]]() // adjacency list representation of the graph
+//
+//    // populate the graph
+//    for edge in edges {
+//        let u = edge[0], v = edge[1]
+//        graph[u, default: []].append(v)
+//        graph[v, default: []].append(u)
+//    }
+//
+//    var distances = Array(repeating: -1, count: n) // array to store the distances from the starting node
+//    var queue = [s] // initialize the queue with the starting node
+//    distances[s-1] = 0 // distance to starting node is 0
+//
+//    // perform breadth-first search
+//    while !queue.isEmpty {
+//        let u = queue.removeFirst()
+//        for v in graph[u, default: []] {
+//            if distances[v-1] == -1 { // v has not been visited yet
+//                distances[v-1] = distances[u-1] + 6
+//                queue.append(v)
+//            }
+//        }
+//    }
+//
+//    distances.remove(at: s-1) // remove the distance to the starting node
+//    return distances
+//}
+//
+//func bfs1(n: Int, m: Int, edges: [[Int]], s: Int) -> [Int] {
+//    var graph = [[Int]](repeating: [], count: n) // adjacency list representation of the graph
+//
+//    // populate the graph
+//    for edge in edges {
+//        let u = edge[0]-1, v = edge[1]-1
+//        graph[u].append(v)
+//        graph[v].append(u)
+//    }
+//
+//    var distances = Array(repeating: -1, count: n) // array to store the distances from the starting node
+//    var visited = Set<Int>() // set to keep track of visited nodes
+//    var queue = Set<Int>([s-1]) // initialize the queue with the starting node
+//
+//    distances[s-1] = 0 // distance to starting node is 0
+//
+//    // perform breadth-first search
+//    while !queue.isEmpty {
+//        let u = queue.removeFirst()
+//        visited.insert(u)
+//        for v in graph[u] {
+//            if !visited.contains(v) { // v has not been visited yet
+//                distances[v] = distances[u] + 6
+//                queue.insert(v)
+//            }
+//        }
+//    }
+//
+//    distances.remove(at: s-1) // remove the distance to the starting node
+//    return distances
+//}

@@ -359,3 +359,57 @@ func bfs1(n: Int, m: Int, edges: [[Int]], s: Int) -> [Int] {
 //    return distances
 //}
  */
+
+//Dictionary implementation in Swift
+
+// Implementation
+class MyHashMap {
+
+    struct Element {
+        var key: Int
+        var value: Int
+    }
+
+    var buckets : [Element] = []
+
+    /** Initialize your data structure here. */
+    init() {
+        buckets = Array(repeating: Element(key: -1, value: -1), count: 2)
+    }
+
+    // returns the current load factor as a decimal - 1 is full, 0 is empty
+    var currentLoadFactor: Double {
+        return Double(buckets.compactMap{$0}.filter{$0.key == -1}.count) / Double(buckets.count)
+    }
+
+    private func resize() {
+        if currentLoadFactor > 0.9 {
+            // double the capacity
+            let extraBuckets: [Element] = Array(repeating: Element(key: -1, value: -1), count: buckets.count)
+            buckets += extraBuckets
+        } else {
+            if currentLoadFactor < 0.4 {
+                // remove blank buckets
+                buckets.removeAll(where: { $0.key == -1 })
+                resize()
+            }
+        }
+    }
+
+    /** value will always be non-negative. */
+    func put(_ key: Int, _ value: Int) {
+        remove(key)
+        resize()
+        buckets.append(Element(key: key, value: value))
+    }
+
+    /** Returns the value to which the specified key is mapped, or -1 if this map contains no mapping for the key */
+    func get(_ key: Int) -> Int {
+        return buckets.first{ $0.key == key }?.value ?? -1
+    }
+
+    /** Removes the mapping of the specified value key if this map contains a mapping for the key */
+    func remove(_ key: Int) {
+        buckets.removeAll(where: { $0.key == key })
+    }
+}

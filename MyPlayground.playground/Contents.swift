@@ -28,7 +28,7 @@ import UIKit
  AA and BB  have no characters in common and hence the output is 0.
 
 
- */
+ 
 
 func commonChild(s1: String, s2: String) -> Int {
     let s1Array = Array(s1)
@@ -298,38 +298,38 @@ func maxSubarray3(_ A: [Int]) -> [Int] {
 
  }
  */
-//func bfs(n: Int, m: Int, edges: [[Int]], s: Int) -> [Int] {
-//    var graph = [Int: [Int]]() // adjacency list representation of the graph
-//
-//    // populate the graph
-//    for edge in edges {
-//        let u = edge[0], v = edge[1]
-//        graph[u, default: []].append(v)
-//        graph[v, default: []].append(u)
-//    }
-//
-//    var distances = Array(repeating: -1, count: n) // array to store the distances from the starting node
-//    var queue = [s] // initialize the queue with the starting node
-//    distances[s-1] = 0 // distance to starting node is 0
-//
-//    // perform breadth-first search
-//    while !queue.isEmpty {
-//        let u = queue.removeFirst()
-//        for v in graph[u, default: []] {
-//            if distances[v-1] == -1 { // v has not been visited yet
-//                distances[v-1] = distances[u-1] + 6
-//                queue.append(v)
-//            }
-//        }
-//    }
-//
-//    distances.remove(at: s-1) // remove the distance to the starting node
-//    return distances
-//}
-//
-//func bfs1(n: Int, m: Int, edges: [[Int]], s: Int) -> [Int] {
-//    var graph = [[Int]](repeating: [], count: n) // adjacency list representation of the graph
-//
+func bfs(n: Int, m: Int, edges: [[Int]], s: Int) -> [Int] {
+    var graph = [Int: [Int]]() // adjacency list representation of the graph
+
+    // populate the graph
+    for edge in edges {
+        let u = edge[0], v = edge[1]
+        graph[u, default: []].append(v)
+        graph[v, default: []].append(u)
+    }
+
+    var distances = Array(repeating: -1, count: n) // array to store the distances from the starting node
+    var queue = [s] // initialize the queue with the starting node
+    distances[s-1] = 0 // distance to starting node is 0
+
+    // perform breadth-first search
+    while !queue.isEmpty {
+        let u = queue.removeFirst()
+        for v in graph[u, default: []] {
+            if distances[v-1] == -1 { // v has not been visited yet
+                distances[v-1] = distances[u-1] + 6
+                queue.append(v)
+            }
+        }
+    }
+
+    distances.remove(at: s-1) // remove the distance to the starting node
+    return distances
+}
+
+func bfs1(n: Int, m: Int, edges: [[Int]], s: Int) -> [Int] {
+    var graph = [[Int]](repeating: [], count: n) // adjacency list representation of the graph
+
 //    // populate the graph
 //    for edge in edges {
 //        let u = edge[0]-1, v = edge[1]-1
@@ -358,3 +358,4 @@ func maxSubarray3(_ A: [Int]) -> [Int] {
 //    distances.remove(at: s-1) // remove the distance to the starting node
 //    return distances
 //}
+ */

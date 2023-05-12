@@ -327,4 +327,34 @@ func bfs(n: Int, m: Int, edges: [[Int]], s: Int) -> [Int] {
     return distances
 }
 
-
+func bfs1(n: Int, m: Int, edges: [[Int]], s: Int) -> [Int] {
+    var graph = [[Int]](repeating: [], count: n) // adjacency list representation of the graph
+    
+    // populate the graph
+    for edge in edges {
+        let u = edge[0]-1, v = edge[1]-1
+        graph[u].append(v)
+        graph[v].append(u)
+    }
+    
+    var distances = Array(repeating: -1, count: n) // array to store the distances from the starting node
+    var visited = Set<Int>() // set to keep track of visited nodes
+    var queue = Set<Int>([s-1]) // initialize the queue with the starting node
+    
+    distances[s-1] = 0 // distance to starting node is 0
+    
+    // perform breadth-first search
+    while !queue.isEmpty {
+        let u = queue.removeFirst()
+        visited.insert(u)
+        for v in graph[u] {
+            if !visited.contains(v) { // v has not been visited yet
+                distances[v] = distances[u] + 6
+                queue.insert(v)
+            }
+        }
+    }
+    
+    distances.remove(at: s-1) // remove the distance to the starting node
+    return distances
+}

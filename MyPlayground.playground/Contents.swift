@@ -1,5 +1,5 @@
 import UIKit
-
+import Foundation
 //var greeting = "Hello, playground"
 
 /*
@@ -358,7 +358,7 @@ func bfs1(n: Int, m: Int, edges: [[Int]], s: Int) -> [Int] {
 //    distances.remove(at: s-1) // remove the distance to the starting node
 //    return distances
 //}
- */
+ 
 
 //Dictionary implementation in Swift
 
@@ -413,3 +413,37 @@ class MyHashMap {
         buckets.removeAll(where: { $0.key == key })
     }
 }
+
+
+Given an array of integers and a target value, determine the number of pairs of array elements that have a difference equal to the target value
+Write function in Swift
+func pairs(k: Int, arr: [Int]) -> Int {
+    // Write your code here
+
+}
+ 
+Example :
+arr = [1, 5, 3, 4, 2]
+k = 2
+output = 3
+ */
+
+func pairs(k: Int, arr: [Int]) -> Int {
+    // Write your code here
+var count = 0
+    let numSet = Set(arr)
+
+    for num in arr {
+        if numSet.contains(num + k) {
+            count += 1
+        }
+    }
+
+    return count
+}
+
+
+
+
+
+

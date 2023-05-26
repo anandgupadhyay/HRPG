@@ -428,22 +428,72 @@ k = 2
 output = 3
  */
 
-func pairs(k: Int, arr: [Int]) -> Int {
-    // Write your code here
-var count = 0
-    let numSet = Set(arr)
+//func pairs(k: Int, arr: [Int]) -> Int {
+//    // Write your code here
+//var count = 0
+//    let numSet = Set(arr)
+//
+//    for num in arr {
+//        if numSet.contains(num + k) {
+//            count += 1
+//        }
+//    }
+//
+//    return count
+//}
 
-    for num in arr {
-        if numSet.contains(num + k) {
-            count += 1
-        }
+
+//let users = ["john": 23, "james": 24, "vincent": 34, "louis": 29]
+//let sortedUsers = users.sorted(by: <)
+//let sortedKeys = sortedUsers.map{$0.0}
+//print(sortedKeys)
+
+
+
+
+//let x = d.map{
+//    $0.1 < $1.1
+//}
+
+//let x = d.sort{ $0.1 < $1.1 }.map{ $0.0 }
+//print(x)
+
+//struct IntStack {
+//  var items = [Int]()
+//  mutating func add(x: Int) {
+//    items.append(x)
+//  }
+//}
+
+var a = 10
+var b = 5
+a = a+b
+b = a-b
+a = a-b
+print(a,b)
+
+class Master {
+    lazy var detail: Detail = Detail(master: self)
+    
+    init() {
+        print("Master init")
     }
-
-    return count
+    
+    deinit {
+        print("Master deinit")
+    }
 }
 
-
-
-
-
+class Detail {
+    var master: Master
+    
+    init(master: Master) {
+        print("Detail init")
+        self.master = master
+    }
+    
+    deinit {
+        print("Detail deinit")
+    }
+}
 

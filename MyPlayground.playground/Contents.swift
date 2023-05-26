@@ -497,3 +497,9 @@ class Detail {
     }
 }
 
+func createMaster() {
+    let master: Master = Master()
+    let detail = master.detail
+}
+    
+createMaster()

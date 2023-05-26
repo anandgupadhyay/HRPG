@@ -505,40 +505,59 @@ output = 3
 //createMaster()
 
 
-import Foundation
+//extension Data {
+//    enum HexadecimalConversionError: String, Error, CustomStringConvertible {
+//        case incomplete_hexadecimal_string
+//        case none_hexadecimal_charactor
+//        var description: String {
+//            return self.rawValue.replacingOccurrences(of: "_", with: " ").capitalized
+//        }
+//    }
+//    init(hexadecimalString string: String) throws {
+//        let hexadecimalString = (string.hasPrefix("0x") || string.hasPrefix("0X")) ? String(string.dropFirst(2)) : string
+//        let characters = Array(hexadecimalString)
+//        guard characters.count % 2 == 0 else { throw HexadecimalConversionError.incomplete_hexadecimal_string }
+//        let indices = stride(from: 0, to: characters.count, by: 2)
+//        let bytes = indices.map { String([characters[$0], characters[$0 + 1]]) }.map { UInt8($0, radix: 16) }
+//        guard bytes.filter({ $0 == nil }).count == 0 else { throw HexadecimalConversionError.none_hexadecimal_charactor }
+//        self = Data(bytes.compactMap { $0 })
+//    }
+//    func hexadecimalString(prefix: String? = nil) -> String {
+//        let hexadecimalString = self.map { String(format: "%02hhx", $0) }.joined()
+//        return (prefix ?? "") + hexadecimalString
+//    }
+//    var hexadecimalString: String {
+//        return hexadecimalString()
+//    }
+//}
+//
+////Usage
+//do {
+//    let string = "0x48656c6c6f20576f726C64"
+//    let data = try Data(hexadecimalString: string)
+//    print(data.hexadecimalString(prefix: "0x"))
+//}
+//catch {
+//    print("\(error)")
+//}
 
-extension Data {
-    enum HexadecimalConversionError: String, Error, CustomStringConvertible {
-        case incomplete_hexadecimal_string
-        case none_hexadecimal_charactor
-        var description: String {
-            return self.rawValue.replacingOccurrences(of: "_", with: " ").capitalized
-        }
-    }
-    init(hexadecimalString string: String) throws {
-        let hexadecimalString = (string.hasPrefix("0x") || string.hasPrefix("0X")) ? String(string.dropFirst(2)) : string
-        let characters = Array(hexadecimalString)
-        guard characters.count % 2 == 0 else { throw HexadecimalConversionError.incomplete_hexadecimal_string }
-        let indices = stride(from: 0, to: characters.count, by: 2)
-        let bytes = indices.map { String([characters[$0], characters[$0 + 1]]) }.map { UInt8($0, radix: 16) }
-        guard bytes.filter({ $0 == nil }).count == 0 else { throw HexadecimalConversionError.none_hexadecimal_charactor }
-        self = Data(bytes.compactMap { $0 })
-    }
-    func hexadecimalString(prefix: String? = nil) -> String {
-        let hexadecimalString = self.map { String(format: "%02hhx", $0) }.joined()
-        return (prefix ?? "") + hexadecimalString
-    }
-    var hexadecimalString: String {
-        return hexadecimalString()
-    }
+//Stock max Hacker rank Swift Solution
+func stockmax(prices: [Int]) -> Int {
+    // Write your code here
+    let n = prices.count
+    var dp = [Int](repeating: 0, count: n)
+    var max = prices[n - 1]
+
+for i in stride(from: n - 1, through: 0, by: -1) {
+    max = (prices[i] > max) ? prices[i] : max
+    dp[i] = max
 }
 
-//Usage
-do {
-    let string = "0x48656c6c6f20576f726C64"
-    let data = try Data(hexadecimalString: string)
-    print(data.hexadecimalString(prefix: "0x"))
+var sum: Int = 0
+
+for i in 0..<n {
+    sum += Int(dp[i] - prices[i])
 }
-catch {
-    print("\(error)")
+    return sum
 }
+

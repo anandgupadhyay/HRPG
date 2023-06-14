@@ -2,6 +2,33 @@ import UIKit
 import Foundation
 //var greeting = "Hello, playground"
 
+
+//Write a function in swift  to find elements that repeat a given N times in a given L list.
+let array = [1,2,3,3,4,4,5,5,2,3,1,4,0,3,2,1,3,4,5,2,7,3,3]
+let occurance = 1
+let countDict = Dictionary(grouping: array, by: { $0 })
+print(countDict)
+let answer = countDict.filter { $0.value.count == occurance }.map { $0.key }
+print(answer.sorted()) // Solution 1
+
+//solution 2
+let histogram2 = array.reduce(into: [:]) { count,number in return count[number,default: 0]+=1}
+print(histogram2)
+let result = histogram2.filter { $0.value == occurance }.map { $0.key }
+print(result.sorted())
+
+
+//Histogram from  [4: [4, 4, 4, 4], 0: [0], 3: [3, 3, 3, 3, 3, 3, 3], 5: [5, 5, 5], 7: [7], 2: [2, 2, 2, 2], 1: [1, 1, 1]]
+//let histogram = countDict.map { key, value in return [ key : value.count] }
+//print(histogram)
+//let result = histogram.filter{ dict in dict.values.contains(occurance) }
+//print(result.flatMap{ $0.keys })
+
+
+
+
+
+
 /*
  Write function in swift
  func commonChild(s1: String, s2: String) -> Int {
@@ -542,22 +569,22 @@ output = 3
 //}
 
 //Stock max Hacker rank Swift Solution
-func stockmax(prices: [Int]) -> Int {
-    // Write your code here
-    let n = prices.count
-    var dp = [Int](repeating: 0, count: n)
-    var max = prices[n - 1]
-
-for i in stride(from: n - 1, through: 0, by: -1) {
-    max = (prices[i] > max) ? prices[i] : max
-    dp[i] = max
-}
-
-var sum: Int = 0
-
-for i in 0..<n {
-    sum += Int(dp[i] - prices[i])
-}
-    return sum
-}
+//func stockmax(prices: [Int]) -> Int {
+//    // Write your code here
+//    let n = prices.count
+//    var dp = [Int](repeating: 0, count: n)
+//    var max = prices[n - 1]
+//
+//for i in stride(from: n - 1, through: 0, by: -1) {
+//    max = (prices[i] > max) ? prices[i] : max
+//    dp[i] = max
+//}
+//
+//var sum: Int = 0
+//
+//for i in 0..<n {
+//    sum += Int(dp[i] - prices[i])
+//}
+//    return sum
+//}
 

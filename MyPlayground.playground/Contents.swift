@@ -3,41 +3,67 @@ import Foundation
 //var greeting = "Hello, playground"
 
 
-func findSearchKeyIndex(arrayOfWords: [String], searchKey: String) -> Int {
-    let keyWords = searchKey.components(separatedBy: " ")
-    var lastIndex = -1
-    
-    for i in 0...(arrayOfWords.count - keyWords.count) {
-        if arrayOfWords[i] == keyWords[0] {
-            var found = true
-            
-            for j in 1..<keyWords.count {
-                if arrayOfWords[i+j] != keyWords[j] {
-                    found = false
-                    break
-                }
-            }
-            
-            if found {
-                lastIndex = i
-            }
-        }
+//func findSearchKeyIndex(arrayOfWords: [String], searchKey: String) -> Int {
+//    let keyWords = searchKey.components(separatedBy: " ")
+//    var lastIndex = -1
+//
+//    for i in 0...(arrayOfWords.count - keyWords.count) {
+//        if arrayOfWords[i] == keyWords[0] {
+//            var found = true
+//
+//            for j in 1..<keyWords.count {
+//                if arrayOfWords[i+j] != keyWords[j] {
+//                    found = false
+//                    break
+//                }
+//            }
+//
+//            if found {
+//                lastIndex = i
+//            }
+//        }
+//    }
+//
+//    return lastIndex
+//}
+//
+//let arrayOfWords = ["Today", "My", "My", "Name", "is", "Anand"]
+//let arrayOfWords1 = ["Today", "My","Name", "My", "Name", "is", "Anand"]
+//let arrayOfWords2 = ["Today", "My", "Your", "My", "Your", "is", "Anand"]
+//let searchKey = "My Name"
+//
+//let index = findSearchKeyIndex(arrayOfWords: arrayOfWords, searchKey: searchKey)
+//print("Index:\(index)")
+//let index1 = findSearchKeyIndex(arrayOfWords: arrayOfWords1, searchKey: searchKey)
+//print("Index:\(index1)")
+//let index2 = findSearchKeyIndex(arrayOfWords: arrayOfWords2, searchKey: searchKey)
+//print("Index:\(index2)")
+
+func generateRandomWord() -> String {
+    let length = Int(arc4random_uniform(10)) + 1 // Random length between 1 and 10
+    var word = ""
+    for _ in 0..<length {
+        let randomChar = Character(UnicodeScalar(arc4random_uniform(26) + 97)!) // Random lowercase letter from 'a' to 'z'
+        word.append(randomChar)
     }
-    
-    return lastIndex
+    return word
 }
 
-let arrayOfWords = ["Today", "My", "My", "Name", "is", "Anand"]
-let arrayOfWords1 = ["Today", "My","Name", "My", "Name", "is", "Anand"]
-let arrayOfWords2 = ["Today", "My", "Your", "My", "Your", "is", "Anand"]
-let searchKey = "My Name"
+var randomWords: [String] = []
+for _ in 0..<100 {
+    let randomWord = generateRandomWord()
+    randomWords.append(randomWord)
+}
 
-let index = findSearchKeyIndex(arrayOfWords: arrayOfWords, searchKey: searchKey)
-print("Index:\(index)")
-let index1 = findSearchKeyIndex(arrayOfWords: arrayOfWords1, searchKey: searchKey)
-print("Index:\(index1)")
-let index2 = findSearchKeyIndex(arrayOfWords: arrayOfWords2, searchKey: searchKey)
-print("Index:\(index2)")
+print(randomWords)
+
+
+
+
+
+
+
+
 
 /*
 //Write a function in swift  to find elements that repeat a given N times in a given L list.

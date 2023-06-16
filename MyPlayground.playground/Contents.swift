@@ -3,6 +3,43 @@ import Foundation
 //var greeting = "Hello, playground"
 
 
+func findSearchKeyIndex(arrayOfWords: [String], searchKey: String) -> Int {
+    let keyWords = searchKey.components(separatedBy: " ")
+    var lastIndex = -1
+    
+    for i in 0...(arrayOfWords.count - keyWords.count) {
+        if arrayOfWords[i] == keyWords[0] {
+            var found = true
+            
+            for j in 1..<keyWords.count {
+                if arrayOfWords[i+j] != keyWords[j] {
+                    found = false
+                    break
+                }
+            }
+            
+            if found {
+                lastIndex = i
+            }
+        }
+    }
+    
+    return lastIndex
+}
+
+let arrayOfWords = ["Today", "My", "My", "Name", "is", "Anand"]
+let arrayOfWords1 = ["Today", "My","Name", "My", "Name", "is", "Anand"]
+let arrayOfWords2 = ["Today", "My", "Your", "My", "Your", "is", "Anand"]
+let searchKey = "My Name"
+
+let index = findSearchKeyIndex(arrayOfWords: arrayOfWords, searchKey: searchKey)
+print("Index:\(index)")
+let index1 = findSearchKeyIndex(arrayOfWords: arrayOfWords1, searchKey: searchKey)
+print("Index:\(index1)")
+let index2 = findSearchKeyIndex(arrayOfWords: arrayOfWords2, searchKey: searchKey)
+print("Index:\(index2)")
+
+/*
 //Write a function in swift  to find elements that repeat a given N times in a given L list.
 let array = [1,2,3,3,4,4,5,5,2,3,1,4,0,3,2,1,3,4,5,2,7,3,3]
 let occurance = 1
@@ -16,7 +53,7 @@ let histogram2 = array.reduce(into: [:]) { count,number in return count[number,d
 print(histogram2)
 let result = histogram2.filter { $0.value == occurance }.map { $0.key }
 print(result.sorted())
-
+*/
 
 //Histogram from  [4: [4, 4, 4, 4], 0: [0], 3: [3, 3, 3, 3, 3, 3, 3], 5: [5, 5, 5], 7: [7], 2: [2, 2, 2, 2], 1: [1, 1, 1]]
 //let histogram = countDict.map { key, value in return [ key : value.count] }

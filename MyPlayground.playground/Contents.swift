@@ -2,6 +2,47 @@ import UIKit
 import Foundation
 //var greeting = "Hello, playground"
 
+//MVVM Demo
+//Model
+struct User {
+    let name: String
+    let age: Int
+}
+import SwiftUI
+
+//View 
+struct UserView: View {
+    @ObservedObject var viewModel: UserViewModel
+    
+    var body: some View {
+        VStack {
+            Text("Name: \(viewModel.name)")
+            Text("Age: \(viewModel.age)")
+            
+            Button("Update Age") {
+                viewModel.updateAge()
+            }
+        }
+    }
+}
+
+//View Model
+import SwiftUI
+class UserViewModel: ObservableObject {
+    @Published var name: String
+    @Published var age: Int
+    
+    init(user: User) {
+        self.name = user.name
+        self.age = user.age
+    }
+    
+    func updateAge() {
+        age += 1
+    }
+}
+
+
 
 //func findSearchKeyIndex(arrayOfWords: [String], searchKey: String) -> Int {
 //    let keyWords = searchKey.components(separatedBy: " ")

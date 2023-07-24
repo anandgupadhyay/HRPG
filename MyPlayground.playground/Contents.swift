@@ -46,6 +46,10 @@ func whoWinsTheGame(_ n: Int) -> String {
     return isLouiseTurn ? "Louise" : "Richard"
 }
 
+// Example usage:
+let n = 6
+let winner = whoWinsTheGame(n)
+print(winner) // Output: Richard
 
 
 //MVVM Demo

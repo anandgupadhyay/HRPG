@@ -2,47 +2,93 @@ import UIKit
 import Foundation
 //var greeting = "Hello, playground"
 
-//MVVM Demo
-//Model
-struct User {
-    let name: String
-    let age: Int
+//Hacker rank  Counter game Louce vs Richard power of 2 game
+func isPowerOfTwo(_ num: Int) -> Bool {
+    return (num > 0) && (num & (num - 1) == 0)
 }
-import SwiftUI
 
-//View 
-struct UserView: View {
-    @ObservedObject var viewModel: UserViewModel
-    
-    var body: some View {
-        VStack {
-            Text("Name: \(viewModel.name)")
-            Text("Age: \(viewModel.age)")
-            
-            Button("Update Age") {
-                viewModel.updateAge()
+func nextPowerOfTwo(_ num: Int) -> Int {
+    var powerOfTwo = 1
+    while powerOfTwo <= num {
+        powerOfTwo *= 2
+    }
+    return powerOfTwo / 2
+}
+
+func whoWinsTheGame(_ n: Int) -> String {
+    if n == 1 {
+        return "Richard"
+    }
+
+    var currentValue = n
+    var isLouiseTurn = true
+
+    while currentValue > 1 {
+        if isLouiseTurn {
+            if isPowerOfTwo(currentValue) {
+                currentValue /= 2
+            } else {
+                let reduceBy = nextPowerOfTwo(currentValue)
+                currentValue -= reduceBy
+            }
+        } else {
+            if isPowerOfTwo(currentValue) {
+                return "Louise"
+            } else {
+                let reduceBy = nextPowerOfTwo(currentValue)
+                currentValue -= reduceBy
             }
         }
-    }
-}
 
-//View Model
-import SwiftUI
-class UserViewModel: ObservableObject {
-    @Published var name: String
-    @Published var age: Int
-    
-    init(user: User) {
-        self.name = user.name
-        self.age = user.age
+        isLouiseTurn = !isLouiseTurn
     }
-    
-    func updateAge() {
-        age += 1
-    }
+
+    return isLouiseTurn ? "Louise" : "Richard"
 }
 
 
+
+//MVVM Demo
+//Model
+// struct User {
+//     let name: String
+//     let age: Int
+// }
+// import SwiftUI
+
+// //View 
+// struct UserView: View {
+//     @ObservedObject var viewModel: UserViewModel
+    
+//     var body: some View {
+//         VStack {
+//             Text("Name: \(viewModel.name)")
+//             Text("Age: \(viewModel.age)")
+            
+//             Button("Update Age") {
+//                 viewModel.updateAge()
+//             }
+//         }
+//     }
+// }
+
+// //View Model
+// import SwiftUI
+// class UserViewModel: ObservableObject {
+//     @Published var name: String
+//     @Published var age: Int
+    
+//     init(user: User) {
+//         self.name = user.name
+//         self.age = user.age
+//     }
+    
+//     func updateAge() {
+//         age += 1
+//     }
+// }
+
+//===========================================
 
 //func findSearchKeyIndex(arrayOfWords: [String], searchKey: String) -> Int {
 //    let keyWords = searchKey.components(separatedBy: " ")

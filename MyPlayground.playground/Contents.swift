@@ -3,53 +3,53 @@ import Foundation
 //var greeting = "Hello, playground"
 
 //Hacker rank  Counter game Louce vs Richard power of 2 game
-func isPowerOfTwo(_ num: Int) -> Bool {
-    return (num > 0) && (num & (num - 1) == 0)
-}
+// func isPowerOfTwo(_ num: Int) -> Bool {
+//     return (num > 0) && (num & (num - 1) == 0)
+// }
 
-func nextPowerOfTwo(_ num: Int) -> Int {
-    var powerOfTwo = 1
-    while powerOfTwo <= num {
-        powerOfTwo *= 2
-    }
-    return powerOfTwo / 2
-}
+// func nextPowerOfTwo(_ num: Int) -> Int {
+//     var powerOfTwo = 1
+//     while powerOfTwo <= num {
+//         powerOfTwo *= 2
+//     }
+//     return powerOfTwo / 2
+// }
 
-func whoWinsTheGame(_ n: Int) -> String {
-    if n == 1 {
-        return "Richard"
-    }
+// func whoWinsTheGame(_ n: Int) -> String {
+//     if n == 1 {
+//         return "Richard"
+//     }
 
-    var currentValue = n
-    var isLouiseTurn = true
+//     var currentValue = n
+//     var isLouiseTurn = true
 
-    while currentValue > 1 {
-        if isLouiseTurn {
-            if isPowerOfTwo(currentValue) {
-                currentValue /= 2
-            } else {
-                let reduceBy = nextPowerOfTwo(currentValue)
-                currentValue -= reduceBy
-            }
-        } else {
-            if isPowerOfTwo(currentValue) {
-                return "Louise"
-            } else {
-                let reduceBy = nextPowerOfTwo(currentValue)
-                currentValue -= reduceBy
-            }
-        }
+//     while currentValue > 1 {
+//         if isLouiseTurn {
+//             if isPowerOfTwo(currentValue) {
+//                 currentValue /= 2
+//             } else {
+//                 let reduceBy = nextPowerOfTwo(currentValue)
+//                 currentValue -= reduceBy
+//             }
+//         } else {
+//             if isPowerOfTwo(currentValue) {
+//                 return "Louise"
+//             } else {
+//                 let reduceBy = nextPowerOfTwo(currentValue)
+//                 currentValue -= reduceBy
+//             }
+//         }
 
-        isLouiseTurn = !isLouiseTurn
-    }
+//         isLouiseTurn = !isLouiseTurn
+//     }
 
-    return isLouiseTurn ? "Louise" : "Richard"
-}
+//     return isLouiseTurn ? "Louise" : "Richard"
+// }
 
-// Example usage:
-let n = 6
-let winner = whoWinsTheGame(n)
-print(winner) // Output: Richard
+// // Example usage:
+// let n = 6
+// let winner = whoWinsTheGame(n)
+// print(winner) // Output: Richard
 
 
 //MVVM Demo

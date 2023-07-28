@@ -1,34 +1,38 @@
 import UIKit
 import Foundation
 
-//Thread safe Singleton
-class Singleton {
+//Thread safe Singleton class
+//You are able to implement Swift's Singleton pattern for concurrent envirompment using GCD and 3 main things:
 
-    static let shared = Singleton()
+// Custom concurrent queue - local queue for better performance where multiple reads can be happened at the same time
+// sync - customQueue.sync for reading a shared resource - to have clear API without callbacks
+// barrier flag - customQueue.async(flags: .barrier) for writing operation: wait when running operations are done -> execute write task -> proceed executing task
 
-    private init(){}
+public class MySingleton {
+    public static let shared = Singleton()
+    
+    //1. custom queue
+    private let customQueue = DispatchQueue(label: "com.mysingleton.queue", qos: .default, attributes: .concurrent)
+    //shared resource
+    private var sharedResource: String = "Hello World"
 
-    private let internalQueue = DispatchQueue(label: "com.singletioninternal.queue",
-                                              qos: .default,
-                                              attributes: .concurrent)
-
-    private var _foo: String = "aaa"
-
-    var foo: String {
+    //computed property can be replaced getters/setters
+    var computedProperty: String {
         get {
-            return internalQueue.sync {
-                _foo
+            //2. sync read
+            return customQueue.sync {
+                sharedResource
             }
         }
-        set (newState) {
-            internalQueue.async(flags: .barrier) {
-                self._foo = newState
+        set {
+            //3. async write
+            customQueue.async(flags: .barrier) {
+                sharedResource = newValue
             }
         }
     }
-
-    func setup(string: String) {
-        foo = string
+    
+    private init() {
     }
 }
 

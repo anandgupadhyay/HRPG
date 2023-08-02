@@ -1,6 +1,22 @@
 import UIKit
 import Foundation
 
+
+let array1 = [1, 2, 3, 4, 5]
+let array2 = ["One", "Two", "Three", "Four", "Five"]
+
+func createDictionary(array1: [Int], array2: [String]) -> [Int: String] {
+    let combinedArray = Array(zip(array1, array2))
+    let array3 = combinedArray.reduce(into: [Int: String]()) { result, tuple in
+        let (key, value) = tuple
+        result[key] = value
+    }
+    return array3
+}
+
+let array3 = createDictionary(array1: array1, array2: array2)
+print(array3)
+
 //Thread safe Singleton class
 //You are able to implement Swift's Singleton pattern for concurrent envirompment using GCD and 3 main things:
 

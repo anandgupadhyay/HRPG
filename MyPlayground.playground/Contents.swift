@@ -2,20 +2,20 @@ import UIKit
 import Foundation
 
 
-let array1 = [1, 2, 3, 4, 5]
-let array2 = ["One", "Two", "Three", "Four", "Five"]
+// let array1 = [1, 2, 3, 4, 5]
+// let array2 = ["One", "Two", "Three", "Four", "Five"]
 
-func createDictionary(array1: [Int], array2: [String]) -> [Int: String] {
-    let combinedArray = Array(zip(array1, array2))
-    let array3 = combinedArray.reduce(into: [Int: String]()) { result, tuple in
-        let (key, value) = tuple
-        result[key] = value
-    }
-    return array3
-}
+// func createDictionary(array1: [Int], array2: [String]) -> [Int: String] {
+//     let combinedArray = Array(zip(array1, array2))
+//     let array3 = combinedArray.reduce(into: [Int: String]()) { result, tuple in
+//         let (key, value) = tuple
+//         result[key] = value
+//     }
+//     return array3
+// }
 
-let array3 = createDictionary(array1: array1, array2: array2)
-print(array3)
+// let array3 = createDictionary(array1: array1, array2: array2)
+// print(array3)
 
 //Thread safe Singleton class
 //You are able to implement Swift's Singleton pattern for concurrent envirompment using GCD and 3 main things:
@@ -24,33 +24,33 @@ print(array3)
 // sync - customQueue.sync for reading a shared resource - to have clear API without callbacks
 // barrier flag - customQueue.async(flags: .barrier) for writing operation: wait when running operations are done -> execute write task -> proceed executing task
 
-public class MySingleton {
-    public static let shared = Singleton()
+// public class MySingleton {
+//     public static let shared = Singleton()
     
-    //1. custom queue
-    private let customQueue = DispatchQueue(label: "com.mysingleton.queue", qos: .default, attributes: .concurrent)
-    //shared resource
-    private var sharedResource: String = "Hello World"
+//     //1. custom queue
+//     private let customQueue = DispatchQueue(label: "com.mysingleton.queue", qos: .default, attributes: .concurrent)
+//     //shared resource
+//     private var sharedResource: String = "Hello World"
 
-    //computed property can be replaced getters/setters
-    var computedProperty: String {
-        get {
-            //2. sync read
-            return customQueue.sync {
-                sharedResource
-            }
-        }
-        set {
-            //3. async write
-            customQueue.async(flags: .barrier) {
-                sharedResource = newValue
-            }
-        }
-    }
+//     //computed property can be replaced getters/setters
+//     var computedProperty: String {
+//         get {
+//             //2. sync read
+//             return customQueue.sync {
+//                 sharedResource
+//             }
+//         }
+//         set {
+//             //3. async write
+//             customQueue.async(flags: .barrier) {
+//                 sharedResource = newValue
+//             }
+//         }
+//     }
     
-    private init() {
-    }
-}
+//     private init() {
+//     }
+// }
 
 
 //var greeting = "Hello, playground"
